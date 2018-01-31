@@ -1,0 +1,13 @@
+{
+  "generator-jhipster": {
+    "appsFolders": [
+      "gateway",
+      "req-mgmt"
+    ],
+    "directoryPath": "../",
+    "gatewayType": "zuul",
+    "monitoring": "prometheus",
+    "serviceDiscoveryType": "consul",
+    "jwtSecretKey": "418551d8f30051f0467af76c6bc21e7171ff083d"
+  }
+}
