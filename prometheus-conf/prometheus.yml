@@ -26,7 +26,23 @@ scrape_configs:
 
     # scheme defaults to 'http'.
     metrics_path: /prometheusMetrics
-    static_configs:
-         - targets:
-             - gateway-app:8080
-             - requirementManagement-app:8081
+    
+    consul_sd_configs:
+    # binds to the consul service container which is part of the docker-compose
+      - server: consul:8500
+      # - token: <secret> ]
+      # - datacenter: <string> ]
+      # - scheme: <string> | default = "http"]
+      # - username: <string> ]
+      # - password: <secret> ]
+    relabel_configs:
+      # relabels the "instance" label in Targets UI to be equal the name of the consul node
+      - source_labels: [__meta_consul_node]
+        target_label: instance
+        # Following are default values and can be omitted
+        regex: '(.*)'
+        replacement: $1
+        action: replace
+      # relabels the "jobs" in Targets UI with the name of the consul service
+      - source_labels: [__meta_consul_service]
+        target_label: job
