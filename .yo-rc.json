@@ -1,8 +1,9 @@
 {
   "generator-jhipster": {
     "appsFolders": [
+      "case-management",
       "gateway",
-      "req-mgmt"
+      "requirement-management"
     ],
     "directoryPath": "../",
     "gatewayType": "zuul",

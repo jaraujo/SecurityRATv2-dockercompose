@@ -1,5 +1,20 @@
 version: '2'
 services:
+    casemanagement-app:
+        image: casemanagement
+        environment:
+            - SPRING_PROFILES_ACTIVE=prod,swagger
+            - SPRING_CLOUD_CONSUL_HOST=consul
+            - SPRING_CLOUD_CONSUL_PORT=8500
+            - SECURITY_OAUTH2_CLIENT_ACCESS_TOKEN_URI=http://keycloak:9080/auth/realms/jhipster/protocol/openid-connect/token
+            - SECURITY_OAUTH2_CLIENT_USER_AUTHORIZATION_URI=http://keycloak:9080/auth/realms/jhipster/protocol/openid-connect/auth
+            - SECURITY_OAUTH2_RESOURCE_USER_INFO_URI=http://keycloak:9080/auth/realms/jhipster/protocol/openid-connect/userinfo
+            - SECURITY_OAUTH2_RESOURCE_TOKEN_INFO_URI=http://keycloak:9080/auth/realms/jhipster/protocol/openid-connect/token/introspect
+            - SECURITY_OAUTH2_RESOURCE_JWT_KEY_URI=http://keycloak:9080/auth/realms/jhipster
+            - JHIPSTER_SLEEP=10
+            - JHIPSTER_METRICS_PROMETHEUS_ENABLED=true
+            - JHIPSTER_METRICS_PROMETHEUS_ENDPOINT=/prometheusMetrics
+    
     gateway-app:
         image: gateway
         environment:
@@ -47,19 +62,7 @@ services:
             - MYSQL_ALLOW_EMPTY_PASSWORD=yes
             - MYSQL_DATABASE=requirementmanagement
         command: mysqld --lower_case_table_names=1 --skip-ssl
-    casemanagement-app:
-        image: casemanagement
-        environment:
-            - SPRING_PROFILES_ACTIVE=prod,swagger
-            - SPRING_CLOUD_CONSUL_HOST=consul
-            - SPRING_CLOUD_CONSUL_PORT=8500
-            # For keycloak to work, you need to add '127.0.0.1 keycloak' to your hosts file
-            - SECURITY_OAUTH2_CLIENT_ACCESS_TOKEN_URI=http://keycloak:9080/auth/realms/jhipster/protocol/openid-connect/token
-            - SECURITY_OAUTH2_CLIENT_USER_AUTHORIZATION_URI=http://keycloak:9080/auth/realms/jhipster/protocol/openid-connect/auth
-            - SECURITY_OAUTH2_RESOURCE_USER_INFO_URI=http://keycloak:9080/auth/realms/jhipster/protocol/openid-connect/userinfo
-            - SECURITY_OAUTH2_RESOURCE_TOKEN_INFO_URI=http://keycloak:9080/auth/realms/jhipster/protocol/openid-connect/token/introspect
-            - SECURITY_OAUTH2_RESOURCE_JWT_KEY_URI=http://keycloak:9080/auth/realms/jhipster
-            - JHIPSTER_SLEEP=10 # gives time for the database to boot before the application
+    
     consul:
         extends:
             file: consul.yml

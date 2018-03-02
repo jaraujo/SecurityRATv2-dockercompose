@@ -10,6 +10,8 @@ Launch all your infrastructure by running: `docker-compose up -d`.
 - [Consul](http://localhost:8500)
 
 ### Applications and dependencies:
+- caseManagement (microservice application)
+- caseManagement's no database
 - gateway (gateway application)
 - gateway's mariadb database
 - requirementManagement (microservice application)
