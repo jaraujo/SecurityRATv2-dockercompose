@@ -1,6 +1,6 @@
 # JHipster generated Docker-Compose configuration
 
-## Usage
+## Usage Instructions
 
 Launch all your infrastructure by running: `docker-compose up -d`.
 
